@@ -4,9 +4,11 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace Mo_Phong_Giai_Thuat_Sap_Xep
 {
+
     public partial class Form1 : Form
     {
         // --------------------------- DỮ LIỆU & TRẠNG THÁI ---------------------------
@@ -43,13 +45,62 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         enum SortType { None, Exchange, Selection, Insertion, Bubble, Heap, Quick, Merge }
         SortType _sort = SortType.None;
 
-        // --------------------------- KHỞI TẠO ---------------------------
 
+        float _angle = 0f;   // góc quay (radian)
+        bool _rotating = false;
+        List<SortHistoryItem> history = new List<SortHistoryItem>(10);
+
+        // --------------------------- KHỞI TẠO ---------------------------
+        public class SortHistoryItem
+        {
+            public List<int> Values { get; set; }        // Mảng tại thời điểm ghi
+            public DateTime Time { get; set; }           // Thời gian ghi
+            public string Direction { get; set; }        // "Tăng dần" hoặc "Giảm dần"
+            public string Algorithm { get; set; }        // Tên thuật toán
+
+            public SortHistoryItem(List<int> values, string direction, string algorithm)
+            {
+                Values = new List<int>(values); // copy mảng
+                Time = DateTime.Now;
+                Direction = direction;
+                Algorithm = algorithm;
+            }
+        }
+        void SaveHistorySnapshot()
+        {
+            // nếu chưa có dữ liệu thì khỏi lưu
+            if (_values.Count == 0) return;
+            if (_sort == SortType.None) return;
+
+            string direction = ascending ? "Tăng Dần" : "Giảm Dần";
+            string algo = _sort.ToString(); // "Quick", "Merge", ...
+
+            // Nếu đã đủ 10 bản ghi thì xoá bản cuối cùng
+            if (history.Count >= 10)
+                history.RemoveAt(history.Count - 1);
+
+            // Thêm bản ghi mới vào ĐẦU list (mới nhất đứng trước)
+            history.Insert(0, new SortHistoryItem(_values, direction, algo));
+        }
         public Form1()
         {
+            
             InitializeComponent();
+            textBox_Input_Element_By_Hand.MaxLength = 3;
+            this.DoubleBuffered = true;
+            typeof(Control).InvokeMember(
+                "DoubleBuffered",
+                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                groupBox1,
+                new object[] { true });
+
             this.KeyDown += Form1_KeyDown;
-         
+            groupBox1.Paint += groupBox1_Paint;
+            _ = RotateStarAsync();
+            Invalidate();
+
+            
             // vị trí mặc định của dãy (giữa vùng phía trên)
             RecalcBaseY();
 
@@ -73,9 +124,9 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 paused = !paused; // đảo trạng thái
 
                 if (paused)
-                    button_stop.Text = "Tiếp tục";
+                    button_stop.Text = "Tiếp Tục";
                 else
-                    button_stop.Text = "Tạm dừng";
+                    button_stop.Text = "Tạm Dừng";
             };
             button_before_sort.Click += button_before_sort_Click;
             button_reset.Click += (_, __) => { paused = false; running = false; cts?.Cancel(); ClearAll(); button_add.Enabled = true; };
@@ -129,7 +180,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             if (_beforeSort == null || _beforeSort.Count == 0)
             {
-                MessageBox.Show("Chưa có dữ liệu ban đầu để khôi phục!");
+                MessageBox.Show("Chưa có dữ liệu ban đầu để khôi phục!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -145,7 +196,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             button_add.Enabled = true;
             // Reset trạng thái nút tạm dừng (không thay đổi logic khác của bạn)
-            button_stop.Text = "Tạm dừng";
+            button_stop.Text = "Tạm Dừng";
             //button_stop.Enabled = false; // vì hiện tại không chạy
 
             // (Không đụng gì đến thuật toán, màu sắc sẽ là normal do MakeLabel)
@@ -184,8 +235,99 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         void OnlyDigit_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) e.Handled = true;
+            // Luôn cho phép phím điều khiển (Backspace, Delete, mũi tên, Ctrl+C/V...)
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            TextBox tb = sender as TextBox;
+            bool isHandInput = (tb == textBox_Input_Element_By_Hand);
+
+            // ---------------- Ô RANDOM: chỉ cho số dương như cũ ----------------
+            if (!isHandInput)
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+                return;
+            }
+
+            // ---------------- Ô NHẬP THỦ CÔNG: cho phép số âm ----------------
+
+            // 1) Xử lý dấu '-'
+            if (e.KeyChar == '-')
+            {
+                string text = tb.Text;
+                int selStart = tb.SelectionStart;
+                int selLength = tb.SelectionLength;
+
+                // Cho phép nếu:
+                // - gõ ở vị trí đầu (selStart == 0)
+                // - và hiện tại chưa có '-' (trừ trường hợp đang bôi đen cả chuỗi để gõ đè)
+                bool replacingAll = (selLength == text.Length && text.Length > 0);
+
+                string newText;
+                if (replacingAll)
+                {
+                    // bôi đen hết rồi gõ '-' => kết quả chỉ còn "-"
+                    newText = "-";
+                }
+                else
+                {
+                    if (selStart != 0 || text.Contains("-"))
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+                    newText = text.Remove(selStart, selLength)
+                                  .Insert(selStart, "-");
+                }
+
+                // Tổng số ký tự không quá 3
+                if (newText.Length > 3)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                // ok
+                e.Handled = false;
+                return;
+            }
+
+            // 2) Các ký tự khác: chỉ cho số
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // 3) Giới hạn tổng số ký tự ≤ 3 (kể cả có dấu '-')
+            {
+                string text = tb.Text;
+                int selStart = tb.SelectionStart;
+                int selLength = tb.SelectionLength;
+
+                string newText;
+                if (selLength > 0)
+                {
+                    newText = text.Remove(selStart, selLength)
+                                  .Insert(selStart, e.KeyChar.ToString());
+                }
+                else
+                {
+                    newText = text.Insert(selStart, e.KeyChar.ToString());
+                }
+
+                if (newText.Length > 3)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
         }
+
+
 
         void ChangeSpeed(int delta)
         {
@@ -220,7 +362,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 // Đọc số lượng cần thêm
                 if (!int.TryParse(textBox_Input_Number_Element_RanDom.Text, out int n) || n < 1)
                 {
-                    MessageBox.Show("Vui lòng nhập số lượng phần tử ≥ 1",
+                    MessageBox.Show("Vui lòng nhập số lượng phần tử ≥ 1 và ≤ 10.",
                         "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -307,7 +449,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
                 // VÔ HIỆU HÓA NÚT THÊM KHI ĐANG CHẠY
                 button_add.Enabled = false;
-
+                SaveHistorySnapshot();
                 try
                 {
                     await RunSortAsync(cts.Token);
@@ -328,7 +470,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 paused = false;
             }
 
-            button_stop.Text = "Tạm dừng";
+            button_stop.Text = "Tạm Dừng";
         }
 
         // --------------------------- ANIMATION CƠ BẢN ---------------------------
@@ -680,46 +822,39 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             // 4) Đưa pivot về đúng CỘT cuối cùng (đi dọc rồi ngang)
             await MoveLabelToAsync(pivotLabel, pivotTargetX, pivotRowY, tk);
 
-            // 5) Xếp các phần tử NHỎ HƠN sang TRÁI pivot, cùng hàng pivotRowY
-            for (int i = 0; i < lessCount; i++)
+            // 5) QUÉT TỪ TRÁI SANG PHẢI, VỪA XÉT VỪA ĐẨY TRÁI / PHẢI / BẰNG PIVOT
+            int nextLeftIndex = left;                       // slot < pivot
+            int nextEqualIndex = newPivotIndex + 1;          // slot = pivot (trừ pivot)
+            int nextRightIndex = newPivotIndex + equalCount; // slot > pivot
+
+            for (int i = left; i <= right; i++)
             {
-                int oldIndex = less[i];
-                Label lbl = _labels[oldIndex];
+                if (i == pivotIndexLogical)
+                    continue; // pivot đã xử lý
 
-                int targetIndex = left + i;
+                Label lbl = _labels[i];
+                int cmp = Cmp(_values[i], pivotVal);
+
+                int targetIndex;
+                if (cmp < 0)
+                {
+                    targetIndex = nextLeftIndex++;
+                }
+                else if (cmp > 0)
+                {
+                    targetIndex = nextRightIndex++;
+                }
+                else
+                {
+                    // bằng pivot (ngoài pivot chính) -> xếp sát bên phải pivot
+                    targetIndex = nextEqualIndex++;
+                }
+
                 int targetX = XOfIndex(targetIndex);
-
                 await MoveLabelToAsync(lbl, targetX, pivotRowY, tk);
             }
 
-            // 6) Xếp các phần tử BẰNG pivot (trừ chính pivot) bên PHẢI pivot
-            // equal[0] là pivot ban đầu, pivotLabel đã đứng ở newPivotIndex rồi
-            for (int i = 1; i < equalCount; i++)
-            {
-                int oldIndex = equal[i];
-                Label lbl = _labels[oldIndex];
-
-                int targetIndex = newPivotIndex + i;   // ngay sau pivot
-                int targetX = XOfIndex(targetIndex);
-
-                await MoveLabelToAsync(lbl, targetX, pivotRowY, tk);
-            }
-
-            // 7) Xếp các phần tử LỚN HƠN pivot sang PHẢI tiếp nữa
-            for (int i = 0; i < greaterCount; i++)
-            {
-                int oldIndex = greater[i];
-                Label lbl = _labels[oldIndex];
-
-                int targetIndex = newPivotIndex + equalCount + i;
-                int targetX = XOfIndex(targetIndex);
-
-                await MoveLabelToAsync(lbl, targetX, pivotRowY, tk);
-            }
-
-            // (không thêm delay nữa, animation tự tốn thời gian rồi)
-
-            // 8) Cập nhật lại _values & _labels theo thứ tự [less][equal][greater]
+            // 6) Cập nhật lại _values & _labels theo thứ tự [less][equal][greater]
             int[] newValues = new int[len];
             Label[] newLabels = new Label[len];
             int pos = 0;
@@ -752,7 +887,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             // Cập nhật lại pivotLabel theo vị trí mới trong mảng
             pivotLabel = _labels[newPivotIndex];
 
-            // 9) Hạ CẢ ĐOẠN [left..right] về hàng baseY (đi dọc + ngang)
+            // 7) Hạ CẢ ĐOẠN [left..right] về hàng baseY (đi dọc + ngang)
             for (int i = left; i <= right; i++)
                 await MoveLabelToAsync(_labels[i], XOfIndex(i), baseY, tk);
 
@@ -760,7 +895,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             pivotLabel.BackColor = normal;
             ResetPartitionColor(left, right);
 
-            // 10) Đệ quy 2 bên
+            // 8) Đệ quy 2 bên
             if (left < newPivotIndex - 1)
                 await QuickSortAsync(left, newPivotIndex - 1, tk);
             if (newPivotIndex + 1 < right)
@@ -933,5 +1068,171 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private async Task RotateStarAsync()
+        {
+            if (_rotating) return;   // tránh gọi 2 lần
+            _rotating = true;
+
+            while (_rotating)
+            {
+                _angle += 0.1f;          // tăng góc (0.1 rad ~ 5.7 độ)
+                if (_angle > Math.PI * 2)
+                    _angle -= (float)(Math.PI * 2);
+
+                groupBox1.Invalidate();  // yêu cầu vẽ lại groupBox1
+                await Task.Delay(30);    // tốc độ quay (ms)
+            }
+        }
+        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Tâm của hình tròn + ngôi sao (trong toạ độ của groupBox1)
+            float x = 750, y = 32;
+
+            // ----- VẼ HÌNH TRÒN ĐỎ (KHÔNG CẦN XOAY) -----
+            float radius = 15;
+            g.FillEllipse(Brushes.IndianRed, x - radius, y - radius, radius * 2, radius * 2);
+            g.DrawEllipse(Pens.Black, x - radius, y - radius, radius * 2, radius * 2);
+
+            // ----- TÍNH NGÔI SAO BAN ĐẦU (chưa xoay) -----
+            float R = 10;
+            PointF[] DS_Diem = new PointF[10];
+
+            DS_Diem[0] = new PointF(x, y - R);
+            float t1 = R * (float)Math.Cos(2 * Math.PI / 5);
+            float t2 = R * (float)Math.Sin(2 * Math.PI / 5);
+            DS_Diem[2] = new PointF(x - t2, y - t1);
+            DS_Diem[8] = new PointF(x + t2, y - t1);
+            float t3 = R * (float)Math.Cos(Math.PI / 5);
+            float t4 = R * (float)Math.Sin(Math.PI / 5);
+            DS_Diem[4] = new PointF(x - t4, y + t3);
+            DS_Diem[6] = new PointF(x + t4, y + t3);
+            float t5 = t1 * (float)Math.Tan(Math.PI / 5);
+            DS_Diem[1] = new PointF(x - t5, y - t1);
+            DS_Diem[9] = new PointF(x + t5, y - t1);
+            float r = t1 / (float)Math.Cos(Math.PI / 5);
+            float t6 = r * (float)Math.Cos(2 * Math.PI / 5);
+            float t7 = r * (float)Math.Sin(2 * Math.PI / 5);
+            DS_Diem[3] = new PointF(x - t7, y + t6);
+            DS_Diem[7] = new PointF(x + t7, y + t6);
+            DS_Diem[5] = new PointF(x, y + r);
+
+            // ----- XOAY NGÔI SAO QUANH TÂM (x, y) THEO GÓC _angle -----
+            PointF[] rotated = new PointF[DS_Diem.Length];
+            float cosA = (float)Math.Cos(_angle);
+            float sinA = (float)Math.Sin(_angle);
+
+            for (int i = 0; i < DS_Diem.Length; i++)
+            {
+                float px = DS_Diem[i].X;
+                float py = DS_Diem[i].Y;
+
+                // chuyển về hệ tọa độ tâm (0,0)
+                float dx = px - x;
+                float dy = py - y;
+
+                // xoay (dx,dy)
+                float rx = dx * cosA - dy * sinA;
+                float ry = dx * sinA + dy * cosA;
+
+                // chuyển lại về (x,y)
+                rotated[i] = new PointF(x + rx, y + ry);
+            }
+
+            // ----- VẼ NGÔI SAO XOAY -----
+            g.FillPolygon(Brushes.Gold, rotated);
+            g.DrawPolygon(Pens.Black, rotated);
+        }
+
+        private void button_history_Click(object sender, EventArgs e)
+        {
+            // mở Form2, truyền list history
+            var f = new Form2(history);
+            f.StartPosition = FormStartPosition.CenterParent;
+
+            // dùng ShowDialog để chờ user chọn xong
+            if (f.ShowDialog(this) == DialogResult.OK)
+            {
+                var item = f.SelectedHistory;
+                if (item != null)
+                {
+                    ApplyHistoryItemToForm1(item);
+                }
+            }
+        }
+        private void ApplyHistoryItemToForm1(SortHistoryItem item)
+        {
+            // dừng mọi sort đang chạy
+            paused = false;
+            if (running)
+            {
+                cts?.Cancel();
+                running = false;
+            }
+
+            // clear dãy hiện tại trên form
+            ClearAll();
+
+            // khôi phục mảng
+            _values.AddRange(item.Values);
+            for (int i = 0; i < _values.Count; i++)
+            {
+                var lb = MakeLabel(_values[i], i);
+                _labels.Add(lb);
+                Controls.Add(lb);
+            }
+
+            // khôi phục chiều sắp xếp
+            ascending = item.Direction == "Tăng Dần";
+            radioButton_Increase.Checked = ascending;
+            radioButton_Decrease.Checked = !ascending;
+
+            // khôi phục loại thuật toán + tick đúng radio
+            switch (item.Algorithm)
+            {
+                case "Exchange":
+                    _sort = SortType.Exchange;
+                    radioButton_Exchange_Sort.Checked = true;
+                    break;
+
+                case "Selection":
+                    _sort = SortType.Selection;
+                    radioButton_Selection_Sort.Checked = true;
+                    break;
+
+                case "Insertion":
+                    _sort = SortType.Insertion;
+                    radioButton_Insertion_Sort.Checked = true;
+                    break;
+
+                case "Bubble":
+                    _sort = SortType.Bubble;
+                    radioButton_Bubble_Sort.Checked = true;
+                    break;
+
+                case "Heap":
+                    _sort = SortType.Heap;
+                    radioButton_Heap_Sort.Checked = true;
+                    break;
+
+                case "Quick":
+                    _sort = SortType.Quick;
+                    radioButton_Quick_Sort.Checked = true;
+                    break;
+
+                case "Merge":
+                    _sort = SortType.Merge;
+                    radioButton_Merge_Sort.Checked = true;
+                    break;
+            }
+
+            // cập nhật snapshot "trước khi sắp xếp" cho nút Data Trước
+            SaveBeforeSortSnapshot();
+        }
+
+
     }
 }

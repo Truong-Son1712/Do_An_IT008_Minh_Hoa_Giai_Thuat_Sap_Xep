@@ -44,6 +44,7 @@
             this.radioButton_Selection_Sort = new System.Windows.Forms.RadioButton();
             this.radioButton_Exchange_Sort = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_history = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.button_add = new System.Windows.Forms.Button();
             this.button_decrease_speed = new System.Windows.Forms.Button();
@@ -73,11 +74,12 @@
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.button_stop);
-            this.groupBox1.Location = new System.Drawing.Point(12, 285);
+            this.groupBox1.Location = new System.Drawing.Point(12, 303);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1058, 256);
+            this.groupBox1.Size = new System.Drawing.Size(1058, 271);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
             // button_before_sort
             // 
@@ -102,7 +104,7 @@
             // radioButton_Decrease
             // 
             this.radioButton_Decrease.AutoSize = true;
-            this.radioButton_Decrease.Location = new System.Drawing.Point(900, 30);
+            this.radioButton_Decrease.Location = new System.Drawing.Point(844, 30);
             this.radioButton_Decrease.Name = "radioButton_Decrease";
             this.radioButton_Decrease.Size = new System.Drawing.Size(88, 20);
             this.radioButton_Decrease.TabIndex = 6;
@@ -114,7 +116,7 @@
             // 
             this.radioButton_Increase.AutoSize = true;
             this.radioButton_Increase.Checked = true;
-            this.radioButton_Increase.Location = new System.Drawing.Point(765, 30);
+            this.radioButton_Increase.Location = new System.Drawing.Point(736, 30);
             this.radioButton_Increase.Name = "radioButton_Increase";
             this.radioButton_Increase.Size = new System.Drawing.Size(88, 20);
             this.radioButton_Increase.TabIndex = 5;
@@ -154,7 +156,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(540, 65);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(512, 185);
+            this.groupBox3.Size = new System.Drawing.Size(512, 193);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thiết Lập Thuật Toán";
@@ -163,7 +165,7 @@
             // 
             this.radioButton_Merge_Sort.AutoSize = true;
             this.radioButton_Merge_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_Merge_Sort.Location = new System.Drawing.Point(259, 94);
+            this.radioButton_Merge_Sort.Location = new System.Drawing.Point(304, 111);
             this.radioButton_Merge_Sort.Name = "radioButton_Merge_Sort";
             this.radioButton_Merge_Sort.Size = new System.Drawing.Size(94, 20);
             this.radioButton_Merge_Sort.TabIndex = 6;
@@ -175,7 +177,7 @@
             // 
             this.radioButton_Quick_Sort.AutoSize = true;
             this.radioButton_Quick_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_Quick_Sort.Location = new System.Drawing.Point(259, 62);
+            this.radioButton_Quick_Sort.Location = new System.Drawing.Point(304, 73);
             this.radioButton_Quick_Sort.Name = "radioButton_Quick_Sort";
             this.radioButton_Quick_Sort.Size = new System.Drawing.Size(89, 20);
             this.radioButton_Quick_Sort.TabIndex = 5;
@@ -187,7 +189,7 @@
             // 
             this.radioButton_Heap_Sort.AutoSize = true;
             this.radioButton_Heap_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_Heap_Sort.Location = new System.Drawing.Point(259, 30);
+            this.radioButton_Heap_Sort.Location = new System.Drawing.Point(304, 32);
             this.radioButton_Heap_Sort.Name = "radioButton_Heap_Sort";
             this.radioButton_Heap_Sort.Size = new System.Drawing.Size(89, 20);
             this.radioButton_Heap_Sort.TabIndex = 4;
@@ -199,7 +201,7 @@
             // 
             this.radioButton_Bubble_Sort.AutoSize = true;
             this.radioButton_Bubble_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_Bubble_Sort.Location = new System.Drawing.Point(17, 129);
+            this.radioButton_Bubble_Sort.Location = new System.Drawing.Point(17, 153);
             this.radioButton_Bubble_Sort.Name = "radioButton_Bubble_Sort";
             this.radioButton_Bubble_Sort.Size = new System.Drawing.Size(98, 20);
             this.radioButton_Bubble_Sort.TabIndex = 3;
@@ -211,7 +213,7 @@
             // 
             this.radioButton_Insertion_Sort.AutoSize = true;
             this.radioButton_Insertion_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_Insertion_Sort.Location = new System.Drawing.Point(17, 94);
+            this.radioButton_Insertion_Sort.Location = new System.Drawing.Point(17, 111);
             this.radioButton_Insertion_Sort.Name = "radioButton_Insertion_Sort";
             this.radioButton_Insertion_Sort.Size = new System.Drawing.Size(105, 20);
             this.radioButton_Insertion_Sort.TabIndex = 2;
@@ -223,7 +225,7 @@
             // 
             this.radioButton_Selection_Sort.AutoSize = true;
             this.radioButton_Selection_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton_Selection_Sort.Location = new System.Drawing.Point(17, 64);
+            this.radioButton_Selection_Sort.Location = new System.Drawing.Point(17, 73);
             this.radioButton_Selection_Sort.Name = "radioButton_Selection_Sort";
             this.radioButton_Selection_Sort.Size = new System.Drawing.Size(111, 20);
             this.radioButton_Selection_Sort.TabIndex = 1;
@@ -245,6 +247,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button_history);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.button_add);
             this.groupBox2.Controls.Add(this.button_decrease_speed);
@@ -260,25 +263,37 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(6, 65);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(517, 185);
+            this.groupBox2.Size = new System.Drawing.Size(517, 193);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thiết lập giá trị đầu vào";
             // 
+            // button_history
+            // 
+            this.button_history.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.button_history.Location = new System.Drawing.Point(365, 98);
+            this.button_history.Name = "button_history";
+            this.button_history.Size = new System.Drawing.Size(142, 33);
+            this.button_history.TabIndex = 13;
+            this.button_history.Text = "Lịch Sử Duyệt";
+            this.button_history.UseVisualStyleBackColor = false;
+            this.button_history.Click += new System.EventHandler(this.button_history_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(174, 94);
+            this.label4.Location = new System.Drawing.Point(1, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(258, 16);
+            this.label4.Size = new System.Drawing.Size(310, 48);
             this.label4.TabIndex = 12;
-            this.label4.Text = "(Lưu Ý: Số lượng phần tử tối đa là 10)";
+            this.label4.Text = "Lưu ý : -Số lượng phần tử tối đa là 10      \r\n           -Phạm vi phần tử trong đ" +
+    "oạn [-99, 999]\r\n\r\n";
             // 
             // button_add
             // 
             this.button_add.BackColor = System.Drawing.Color.Moccasin;
             this.button_add.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button_add.Location = new System.Drawing.Point(428, 26);
+            this.button_add.Location = new System.Drawing.Point(439, 26);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(68, 54);
             this.button_add.TabIndex = 11;
@@ -288,7 +303,7 @@
             // button_decrease_speed
             // 
             this.button_decrease_speed.BackColor = System.Drawing.Color.LightSalmon;
-            this.button_decrease_speed.Location = new System.Drawing.Point(341, 127);
+            this.button_decrease_speed.Location = new System.Drawing.Point(371, 146);
             this.button_decrease_speed.Name = "button_decrease_speed";
             this.button_decrease_speed.Size = new System.Drawing.Size(73, 34);
             this.button_decrease_speed.TabIndex = 9;
@@ -298,7 +313,7 @@
             // button_increase_speed
             // 
             this.button_increase_speed.BackColor = System.Drawing.Color.LightGreen;
-            this.button_increase_speed.Location = new System.Drawing.Point(177, 127);
+            this.button_increase_speed.Location = new System.Drawing.Point(177, 146);
             this.button_increase_speed.Name = "button_increase_speed";
             this.button_increase_speed.Size = new System.Drawing.Size(73, 34);
             this.button_increase_speed.TabIndex = 8;
@@ -311,7 +326,7 @@
             this.label_speed.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.label_speed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_speed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_speed.Location = new System.Drawing.Point(269, 129);
+            this.label_speed.Location = new System.Drawing.Point(285, 148);
             this.label_speed.Name = "label_speed";
             this.label_speed.Size = new System.Drawing.Size(50, 27);
             this.label_speed.TabIndex = 7;
@@ -321,7 +336,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(23, 131);
+            this.label3.Location = new System.Drawing.Point(72, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 22);
             this.label3.TabIndex = 10;
@@ -329,7 +344,7 @@
             // 
             // textBox_Input_Element_By_Hand
             // 
-            this.textBox_Input_Element_By_Hand.Location = new System.Drawing.Point(355, 58);
+            this.textBox_Input_Element_By_Hand.Location = new System.Drawing.Point(365, 58);
             this.textBox_Input_Element_By_Hand.Name = "textBox_Input_Element_By_Hand";
             this.textBox_Input_Element_By_Hand.Size = new System.Drawing.Size(48, 22);
             this.textBox_Input_Element_By_Hand.TabIndex = 5;
@@ -346,7 +361,7 @@
             // 
             // textBox_Input_Number_Element_RanDom
             // 
-            this.textBox_Input_Number_Element_RanDom.Location = new System.Drawing.Point(355, 26);
+            this.textBox_Input_Number_Element_RanDom.Location = new System.Drawing.Point(365, 26);
             this.textBox_Input_Number_Element_RanDom.Name = "textBox_Input_Number_Element_RanDom";
             this.textBox_Input_Number_Element_RanDom.Size = new System.Drawing.Size(48, 22);
             this.textBox_Input_Number_Element_RanDom.TabIndex = 3;
@@ -391,7 +406,7 @@
             this.button_stop.Name = "button_stop";
             this.button_stop.Size = new System.Drawing.Size(95, 38);
             this.button_stop.TabIndex = 2;
-            this.button_stop.Text = "Tạm dừng";
+            this.button_stop.Text = "Tạm Dừng";
             this.button_stop.UseVisualStyleBackColor = false;
             // 
             // Form1
@@ -399,8 +414,9 @@
             this.AcceptButton = this.button_add;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 553);
+            this.ClientSize = new System.Drawing.Size(1082, 588);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Mô Phỏng Giải Thuật Sắp Xếp Trực Quan Trong Giảng Dạy Cấu Trúc Dữ Liệu Và Giải Th" +
@@ -447,6 +463,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_before_sort;
+        private System.Windows.Forms.Button button_history;
     }
 }
 

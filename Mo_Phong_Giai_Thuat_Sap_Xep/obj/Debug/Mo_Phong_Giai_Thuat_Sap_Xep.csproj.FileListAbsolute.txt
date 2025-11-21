@@ -9,3 +9,4 @@ C:\Users\ADMIN\Desktop\DA\Mo_Phong_Giai_Thuat_Sap_Xep\Mo_Phong_Giai_Thuat_Sap_Xe
 C:\Users\ADMIN\Desktop\DA\Mo_Phong_Giai_Thuat_Sap_Xep\Mo_Phong_Giai_Thuat_Sap_Xep\obj\Debug\Mo_Phong_Giai_Thuat_Sap_Xep.exe
 C:\Users\ADMIN\Desktop\DA\Mo_Phong_Giai_Thuat_Sap_Xep\Mo_Phong_Giai_Thuat_Sap_Xep\obj\Debug\Mo_Phong_Giai_Thuat_Sap_Xep.pdb
 C:\Users\ADMIN\Desktop\DA\Mo_Phong_Giai_Thuat_Sap_Xep\Mo_Phong_Giai_Thuat_Sap_Xep\obj\Debug\Mo_Phong_Giai_Thuat_Sap_Xep.exe.config
+C:\Users\ADMIN\Desktop\DA\Mo_Phong_Giai_Thuat_Sap_Xep\Mo_Phong_Giai_Thuat_Sap_Xep\obj\Debug\Mo_Phong_Giai_Thuat_Sap_Xep.Form2.resources
