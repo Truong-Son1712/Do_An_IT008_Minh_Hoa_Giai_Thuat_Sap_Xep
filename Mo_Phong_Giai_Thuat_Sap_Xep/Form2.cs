@@ -2,86 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-// alias cho class SortHistoryItem lồng trong Form1
-using SortHistoryItem = Mo_Phong_Giai_Thuat_Sap_Xep.Form1.SortHistoryItem;
+using Lich_su_Sap_Xep = Mo_Phong_Giai_Thuat_Sap_Xep.Form1.Lich_su_Sap_Xep;
 
 namespace Mo_Phong_Giai_Thuat_Sap_Xep
 {
     public partial class Form2 : Form
     {
-        // danh sách lịch sử truyền từ Form1 sang
-        private readonly List<SortHistoryItem> _history;
+        private readonly List<Lich_su_Sap_Xep> Lich_Su;
+        public Lich_su_Sap_Xep Ban_Ghi_Duoc_Chon { get; private set; }
 
-        // bản ghi mà user chọn (Form1 sẽ đọc biến này)
-        public SortHistoryItem SelectedHistory { get; private set; }
-
-        public Form2(List<SortHistoryItem> history)
-        {
+        public Form2(List<Lich_su_Sap_Xep> history)
+        {   
             InitializeComponent();
-
-            _history = history ?? new List<SortHistoryItem>();
-
-            // cấu hình DataGridView cơ bản
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.MultiSelect = false;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.ReadOnly = true;   // chỉ xem, chọn bằng nút "Chọn"
-
-            // event
-            button_delete_history.Click += button_delete_history_Click;
-            button_delete_all_history.Click += button_delete_all_history_Click;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-
-            // đổ dữ liệu lịch sử lên bảng
-            LoadHistoryToGrid();
-            FixHeightToRows();
+            Lich_Su = history ?? new List<Lich_su_Sap_Xep>();
+            Load_Du_lieu_Lich_Su_Len_Grid();
+            Cap_Nhat_Chieu_Cao_Grid();
         }
-
-        // ----------------- LOAD DỮ LIỆU LÊN BẢNG -----------------
-        private void LoadHistoryToGrid()
+        private void Load_Du_lieu_Lich_Su_Len_Grid()
         {
             dataGridView1.Rows.Clear();
-
             int stt = 1;
-            foreach (var item in _history)
+            foreach (var Ban_ghi in Lich_Su)
             {
-                int rowIndex = dataGridView1.Rows.Add();
-                var row = dataGridView1.Rows[rowIndex];
+                int Index_Hang = dataGridView1.Rows.Add();
+                var Hang = dataGridView1.Rows[Index_Hang];
 
-                // gán STT
-                row.Cells["STT"].Value = stt++;
-
-                // mảng giá trị (list int) -> chuỗi
-                row.Cells["values_of_array"].Value = string.Join(", ", item.Values);
-
-                // loại sắp xếp + chiều
-                row.Cells["type_sort"].Value = item.Algorithm + " Sort";      // ví dụ: "Quick", "Merge", ...
-                row.Cells["direction_sort"].Value = item.Direction; // "Tăng dần" / "Giảm dần"
-
-                // thời gian
-                row.Cells["day_time"].Value = item.Time.ToString("HH:mm:ss dd/MM/yyyy");
-
-                // cột "Chọn": nếu là ButtonColumn thì set Text, không thì cũng được
-                if (dataGridView1.Columns["select"] is DataGridViewButtonColumn)
-                {
-                    row.Cells["select"].Value = "Chọn";
-                }
-
-                // lưu SortHistoryItem tương ứng vào Tag để tiện lấy lại
-                row.Tag = item;
+                Hang.Cells["STT"].Value = stt++;
+                Hang.Cells["values_of_array"].Value = string.Join(", ", Ban_ghi.DS_DuLieu);
+                Hang.Cells["type_sort"].Value = Ban_ghi.Giai_Thuat + " Sort";     
+                Hang.Cells["direction_sort"].Value = Ban_ghi.Chieu_Sap_Xep; 
+                Hang.Cells["day_time"].Value = Ban_ghi.Thoi_Gian_ghi.ToString("HH:mm:ss dd/MM/yyyy");
+                Hang.Cells["select"].Value = "Apply";
+                Hang.Tag = Ban_ghi;
             }
         }
-
-        // cập nhật lại STT sau khi xoá bớt bản ghi
-        private void RenumberSTT()
+        private void Cap_Nhat_STT()
         {
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 dataGridView1.Rows[i].Cells["STT"].Value = i + 1;
             }
         }
+        private void Cap_Nhat_Chieu_Cao_Grid()
+        {
+            int Chieu_Cao = dataGridView1.ColumnHeadersHeight; 
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+                Chieu_Cao += row.Height-2;
 
-        // ----------------- XÓA 1 BẢN GHI -----------------
+            dataGridView1.Height = Chieu_Cao + 10;
+        }
+        private void Form2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                button_delete_history.PerformClick(); 
+            }
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close(); 
+            }
+        }
         private void button_delete_history_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null || dataGridView1.CurrentRow.Index < 0)
@@ -89,32 +69,25 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 MessageBox.Show("Hãy chọn một bản ghi cần xoá.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            var Hang_Can_Xoa = dataGridView1.CurrentRow;
+            var Ban_Ghi_Can_Xoa = Hang_Can_Xoa.Tag as Lich_su_Sap_Xep;
 
-            var row = dataGridView1.CurrentRow;
-            var item = row.Tag as SortHistoryItem;
-
-            if (item != null)
+            if (Ban_Ghi_Can_Xoa != null)
             {
-                // xoá khỏi list history
-                _history.Remove(item);
+                Lich_Su.Remove(Ban_Ghi_Can_Xoa); //xóa trong data
             }
+            dataGridView1.Rows.Remove(Hang_Can_Xoa); //xóa trong giao diện
 
-            // xoá khỏi DataGridView
-            dataGridView1.Rows.Remove(row);
-
-            // đánh lại số thứ tự
-            RenumberSTT();
+            Cap_Nhat_STT();
+            Cap_Nhat_Chieu_Cao_Grid();
         }
-
-        // ----------------- XÓA TẤT CẢ BẢN GHI -----------------
         private void button_delete_all_history_Click(object sender, EventArgs e)
         {
-            if (_history.Count == 0)
+            if (Lich_Su.Count == 0)
             {
                 MessageBox.Show("Không có bản ghi nào để xoá.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             var result = MessageBox.Show(
                 "Xoá mọi bản ghi lịch sử?",
                 "Xác nhận",
@@ -123,44 +96,27 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             if (result != DialogResult.Yes) return;
 
-            _history.Clear();
+            Lich_Su.Clear();
             dataGridView1.Rows.Clear();
+            Cap_Nhat_Chieu_Cao_Grid();
         }
-
-        // ----------------- BẤM NÚT "CHỌN" TRONG CỘT select -----------------
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // click header hoặc ngoài vùng data -> bỏ
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
-            // chỉ xử lý nếu bấm đúng cột "select"
             if (dataGridView1.Columns[e.ColumnIndex].Name != "select")
                 return;
 
-            var row = dataGridView1.Rows[e.RowIndex];
-            var item = row.Tag as SortHistoryItem;
-            if (item == null)
+            var Hang_Duoc_Chon = dataGridView1.Rows[e.RowIndex];
+            var DuLieu_Duoc_Chon = Hang_Duoc_Chon.Tag as Lich_su_Sap_Xep;
+            if (DuLieu_Duoc_Chon == null)
                 return;
 
-            // lưu bản ghi được chọn
-            SelectedHistory = item;
+            Ban_Ghi_Duoc_Chon = DuLieu_Duoc_Chon;
 
-            // báo cho Form1 biết là OK (nếu mở bằng ShowDialog)
             this.DialogResult = DialogResult.OK;
-
-            // đóng Form2
             this.Close();
-        }
-        private void FixHeightToRows()
-        {
-            int height = dataGridView1.ColumnHeadersHeight; // chiều cao header
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-                height += row.Height;
-
-            // +2 để tránh bị cắt viền
-            dataGridView1.Height = height + 10;
         }
     }
 }

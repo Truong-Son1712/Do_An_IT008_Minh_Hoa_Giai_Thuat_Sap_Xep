@@ -47,6 +47,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -58,11 +59,15 @@
             this.day_time,
             this.select});
             this.dataGridView1.Location = new System.Drawing.Point(40, 101);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1001, 285);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(1001, 42);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // STT
             // 
@@ -111,6 +116,7 @@
             this.select.HeaderText = "Chọn";
             this.select.MinimumWidth = 6;
             this.select.Name = "select";
+            this.select.ReadOnly = true;
             this.select.Text = "Chọn";
             // 
             // label1
@@ -133,6 +139,7 @@
             this.button_delete_history.TabIndex = 2;
             this.button_delete_history.Text = "Xóa Bản Ghi";
             this.button_delete_history.UseVisualStyleBackColor = false;
+            this.button_delete_history.Click += new System.EventHandler(this.button_delete_history_Click);
             // 
             // button_delete_all_history
             // 
@@ -144,6 +151,7 @@
             this.button_delete_all_history.TabIndex = 3;
             this.button_delete_all_history.Text = "Xóa Mọi Bản Ghi";
             this.button_delete_all_history.UseVisualStyleBackColor = false;
+            this.button_delete_all_history.Click += new System.EventHandler(this.button_delete_all_history_Click);
             // 
             // pictureBox2
             // 
@@ -177,9 +185,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form2";
             this.Text = "Lịch Sử Sắp Xếp";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

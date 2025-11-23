@@ -65,6 +65,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox1.Controls.Add(this.button_before_sort);
             this.groupBox1.Controls.Add(this.button_start);
             this.groupBox1.Controls.Add(this.radioButton_Decrease);
@@ -74,32 +75,34 @@
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.button_stop);
-            this.groupBox1.Location = new System.Drawing.Point(12, 303);
+            this.groupBox1.Location = new System.Drawing.Point(12, 315);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1058, 271);
+            this.groupBox1.Size = new System.Drawing.Size(1058, 267);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
             // button_before_sort
             // 
-            this.button_before_sort.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button_before_sort.BackColor = System.Drawing.Color.DarkTurquoise;
             this.button_before_sort.Location = new System.Drawing.Point(428, 15);
             this.button_before_sort.Name = "button_before_sort";
             this.button_before_sort.Size = new System.Drawing.Size(95, 38);
             this.button_before_sort.TabIndex = 7;
             this.button_before_sort.Text = "Data Trước";
             this.button_before_sort.UseVisualStyleBackColor = false;
+            this.button_before_sort.Click += new System.EventHandler(this.button_before_sort_Click);
             // 
             // button_start
             // 
-            this.button_start.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button_start.BackColor = System.Drawing.Color.DarkTurquoise;
             this.button_start.Location = new System.Drawing.Point(150, 15);
             this.button_start.Name = "button_start";
             this.button_start.Size = new System.Drawing.Size(95, 38);
             this.button_start.TabIndex = 1;
             this.button_start.Text = "Bắt Đầu";
             this.button_start.UseVisualStyleBackColor = false;
+            this.button_start.Click += new System.EventHandler(this.button_start_Click);
             // 
             // radioButton_Decrease
             // 
@@ -111,6 +114,7 @@
             this.radioButton_Decrease.TabStop = true;
             this.radioButton_Decrease.Text = "Giảm Dần";
             this.radioButton_Decrease.UseVisualStyleBackColor = true;
+            this.radioButton_Decrease.CheckedChanged += new System.EventHandler(this.radioButton_Decrease_CheckedChanged);
             // 
             // radioButton_Increase
             // 
@@ -123,6 +127,7 @@
             this.radioButton_Increase.TabStop = true;
             this.radioButton_Increase.Text = "Tăng Dần";
             this.radioButton_Increase.UseVisualStyleBackColor = true;
+            this.radioButton_Increase.CheckedChanged += new System.EventHandler(this.radioButton_Increase_CheckedChanged);
             // 
             // label5
             // 
@@ -136,16 +141,18 @@
             // 
             // button_reset
             // 
-            this.button_reset.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button_reset.BackColor = System.Drawing.Color.DarkTurquoise;
             this.button_reset.Location = new System.Drawing.Point(6, 15);
             this.button_reset.Name = "button_reset";
             this.button_reset.Size = new System.Drawing.Size(95, 38);
             this.button_reset.TabIndex = 0;
             this.button_reset.Text = "Đặt Lại";
             this.button_reset.UseVisualStyleBackColor = false;
+            this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox3.Controls.Add(this.radioButton_Merge_Sort);
             this.groupBox3.Controls.Add(this.radioButton_Quick_Sort);
             this.groupBox3.Controls.Add(this.radioButton_Heap_Sort);
@@ -172,6 +179,7 @@
             this.radioButton_Merge_Sort.TabStop = true;
             this.radioButton_Merge_Sort.Text = "Merge Sort";
             this.radioButton_Merge_Sort.UseVisualStyleBackColor = true;
+            this.radioButton_Merge_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Merge_Sort_CheckedChanged);
             // 
             // radioButton_Quick_Sort
             // 
@@ -184,6 +192,7 @@
             this.radioButton_Quick_Sort.TabStop = true;
             this.radioButton_Quick_Sort.Text = "Quick Sort";
             this.radioButton_Quick_Sort.UseVisualStyleBackColor = true;
+            this.radioButton_Quick_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Quick_Sort_CheckedChanged);
             // 
             // radioButton_Heap_Sort
             // 
@@ -196,6 +205,7 @@
             this.radioButton_Heap_Sort.TabStop = true;
             this.radioButton_Heap_Sort.Text = "Heap Sort";
             this.radioButton_Heap_Sort.UseVisualStyleBackColor = true;
+            this.radioButton_Heap_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Heap_Sort_CheckedChanged);
             // 
             // radioButton_Bubble_Sort
             // 
@@ -208,6 +218,7 @@
             this.radioButton_Bubble_Sort.TabStop = true;
             this.radioButton_Bubble_Sort.Text = "Bubble Sort";
             this.radioButton_Bubble_Sort.UseVisualStyleBackColor = true;
+            this.radioButton_Bubble_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Bubble_Sort_CheckedChanged);
             // 
             // radioButton_Insertion_Sort
             // 
@@ -220,6 +231,7 @@
             this.radioButton_Insertion_Sort.TabStop = true;
             this.radioButton_Insertion_Sort.Text = "Insertion Sort";
             this.radioButton_Insertion_Sort.UseVisualStyleBackColor = true;
+            this.radioButton_Insertion_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Insertion_Sort_CheckedChanged);
             // 
             // radioButton_Selection_Sort
             // 
@@ -232,6 +244,7 @@
             this.radioButton_Selection_Sort.TabStop = true;
             this.radioButton_Selection_Sort.Text = "Selection Sort";
             this.radioButton_Selection_Sort.UseVisualStyleBackColor = true;
+            this.radioButton_Selection_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Selection_Sort_CheckedChanged);
             // 
             // radioButton_Exchange_Sort
             // 
@@ -244,9 +257,11 @@
             this.radioButton_Exchange_Sort.TabStop = true;
             this.radioButton_Exchange_Sort.Text = "Exchange Sort";
             this.radioButton_Exchange_Sort.UseVisualStyleBackColor = true;
+            this.radioButton_Exchange_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Exchange_Sort_CheckedChanged);
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox2.Controls.Add(this.button_history);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.button_add);
@@ -270,7 +285,7 @@
             // 
             // button_history
             // 
-            this.button_history.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.button_history.BackColor = System.Drawing.Color.CornflowerBlue;
             this.button_history.Location = new System.Drawing.Point(365, 98);
             this.button_history.Name = "button_history";
             this.button_history.Size = new System.Drawing.Size(142, 33);
@@ -282,12 +297,13 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1, 97);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(26, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(310, 48);
+            this.label4.Size = new System.Drawing.Size(270, 48);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Lưu ý : -Số lượng phần tử tối đa là 10      \r\n           -Phạm vi phần tử trong đ" +
-    "oạn [-99, 999]\r\n\r\n";
+            this.label4.Text = "Lưu ý :  - Số lượng phần tử tối đa là 10      \r\n             - Phạm vi phần tử tr" +
+    "ong đoạn [-99, 999]\r\n\r\n";
             // 
             // button_add
             // 
@@ -299,6 +315,7 @@
             this.button_add.TabIndex = 11;
             this.button_add.Text = "Thêm";
             this.button_add.UseVisualStyleBackColor = false;
+            this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
             // button_decrease_speed
             // 
@@ -309,6 +326,7 @@
             this.button_decrease_speed.TabIndex = 9;
             this.button_decrease_speed.Text = "Giảm";
             this.button_decrease_speed.UseVisualStyleBackColor = false;
+            this.button_decrease_speed.Click += new System.EventHandler(this.button_decrease_speed_Click);
             // 
             // button_increase_speed
             // 
@@ -319,6 +337,7 @@
             this.button_increase_speed.TabIndex = 8;
             this.button_increase_speed.Text = "Tăng";
             this.button_increase_speed.UseVisualStyleBackColor = false;
+            this.button_increase_speed.Click += new System.EventHandler(this.button_increase_speed_Click);
             // 
             // label_speed
             // 
@@ -348,6 +367,7 @@
             this.textBox_Input_Element_By_Hand.Name = "textBox_Input_Element_By_Hand";
             this.textBox_Input_Element_By_Hand.Size = new System.Drawing.Size(48, 22);
             this.textBox_Input_Element_By_Hand.TabIndex = 5;
+            this.textBox_Input_Element_By_Hand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Input_Element_By_Hand_KeyPress);
             // 
             // label2
             // 
@@ -365,6 +385,7 @@
             this.textBox_Input_Number_Element_RanDom.Name = "textBox_Input_Number_Element_RanDom";
             this.textBox_Input_Number_Element_RanDom.Size = new System.Drawing.Size(48, 22);
             this.textBox_Input_Number_Element_RanDom.TabIndex = 3;
+            this.textBox_Input_Number_Element_RanDom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Input_Number_Element_RanDom_KeyPress);
             // 
             // label1
             // 
@@ -386,6 +407,7 @@
             this.radioButton_By_Hand.TabStop = true;
             this.radioButton_By_Hand.Text = "Nhập thủ công";
             this.radioButton_By_Hand.UseVisualStyleBackColor = true;
+            this.radioButton_By_Hand.CheckedChanged += new System.EventHandler(this.radioButton_By_Hand_CheckedChanged);
             // 
             // radioButton_Random
             // 
@@ -398,29 +420,34 @@
             this.radioButton_Random.TabStop = true;
             this.radioButton_Random.Text = "Nhập ngẫu nhiên";
             this.radioButton_Random.UseVisualStyleBackColor = true;
+            this.radioButton_Random.CheckedChanged += new System.EventHandler(this.radioButton_Random_CheckedChanged);
             // 
             // button_stop
             // 
-            this.button_stop.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button_stop.BackColor = System.Drawing.Color.DarkTurquoise;
             this.button_stop.Location = new System.Drawing.Point(289, 15);
             this.button_stop.Name = "button_stop";
             this.button_stop.Size = new System.Drawing.Size(95, 38);
             this.button_stop.TabIndex = 2;
             this.button_stop.Text = "Tạm Dừng";
             this.button_stop.UseVisualStyleBackColor = false;
+            this.button_stop.Click += new System.EventHandler(this.button_stop_Click);
             // 
             // Form1
             // 
             this.AcceptButton = this.button_add;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1082, 588);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Mô Phỏng Giải Thuật Sắp Xếp Trực Quan Trong Giảng Dạy Cấu Trúc Dữ Liệu Và Giải Th" +
     "uật";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
