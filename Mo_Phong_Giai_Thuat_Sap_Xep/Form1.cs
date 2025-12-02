@@ -39,8 +39,8 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         readonly Color Da_co_dinh = Color.LightGreen;   // đã cố định
         
   
-        enum Loai_Sap_Xep { None, Exchange, Selection, Insertion, Bubble, Heap, Quick, Merge }
-        Loai_Sap_Xep Sap_xep = Loai_Sap_Xep.None;
+        enum Loai_Sap_Xep { none, Exchange, Selection, Insertion, Bubble, Heap, Quick, Merge }
+        Loai_Sap_Xep Sap_xep = Loai_Sap_Xep.none;
 
 
         float Goc_quay = 0f; // góc quay (radian)
@@ -64,7 +64,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         void Save_Du_Lieu()
         {
             if (Mang_Gia_Tri.Count == 0) return;
-            if (Sap_xep == Loai_Sap_Xep.None) return;
+            if (Sap_xep == Loai_Sap_Xep.none) return;
 
             string Chieu_SX = is_tang_dan ? "Tăng Dần" : "Giảm Dần";
             string Loai_Thuat_Toan = Sap_xep.ToString();
@@ -911,7 +911,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         async void button_start_Click(object sender, EventArgs e)
         {
             if (Mang_Gia_Tri.Count == 0) return;
-            if (Sap_xep == Loai_Sap_Xep.None)
+            if (Sap_xep == Loai_Sap_Xep.none)
             {
                 MessageBox.Show("Vui Lòng chọn thuật toán sắp xếp!", "Cảnh báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
