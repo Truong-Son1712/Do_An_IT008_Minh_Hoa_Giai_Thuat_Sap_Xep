@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\",
   "Documents": [
     {
@@ -21,6 +22,25 @@
     {
       "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|c:\\users\\admin\\desktop\\da\\mo_phong_giai_thuat_sap_xep\\mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+=======
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|c:\\users\\admin\\source\\repos\\do_an_it008_minh_hoa_giai_thuat_sap_xep\\mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 5269e00b2fafbd7667d45e9f35c4d3010227336a
     }
   ],
   "DocumentGroupContainers": [
@@ -36,11 +56,19 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
+<<<<<<< HEAD
               "DocumentMoniker": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
               "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
               "ToolTip": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
               "RelativeToolTip": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACwEAAA3AAAAAAAAAA==",
+=======
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
+              "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
+              "RelativeToolTip": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
+              "ViewState": "AgIAAJUDAAAAAAAAAAAowK0DAAANAAAAAAAAAA==",
+>>>>>>> 5269e00b2fafbd7667d45e9f35c4d3010227336a
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T16:52:49.838Z",
               "IsPinned": true,
@@ -50,6 +78,7 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form2.cs [Design]",
+<<<<<<< HEAD
               "DocumentMoniker": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
               "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
               "ToolTip": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs [Design]",
@@ -71,11 +100,29 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-23T09:19:40.358Z",
               "EditorCaption": ""
+=======
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
+              "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T10:17:59.035Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+>>>>>>> 5269e00b2fafbd7667d45e9f35c4d3010227336a
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Form2.cs",
+<<<<<<< HEAD
               "DocumentMoniker": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
               "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
               "ToolTip": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
@@ -96,6 +143,26 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T16:50:16.018Z",
               "EditorCaption": " [Design]"
+=======
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
+              "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
+              "RelativeToolTip": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T12:07:01.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
+              "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T16:50:16.018Z"
+>>>>>>> 5269e00b2fafbd7667d45e9f35c4d3010227336a
             }
           ]
         }
