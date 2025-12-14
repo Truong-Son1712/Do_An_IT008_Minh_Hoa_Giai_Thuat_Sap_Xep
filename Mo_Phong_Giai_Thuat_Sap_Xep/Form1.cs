@@ -1097,7 +1097,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 e.Handled = false;
                 return;
             }
-            if (!char.IsDigit(e.KeyChar))  //chỉ đc nhập số 
+            if (!char.IsDigit(e.KeyChar))  // giới hạn chỉ được nhập kí tự là số
             {
                 e.Handled = true;
                 return;

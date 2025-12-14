@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|solutionrelative:mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D1A55814-0836-40AE-8E07-FFA20AA5B7BE}|Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep.csproj|C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\mo_phong_giai_thuat_sap_xep\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
               "RelativeToolTip": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
-              "ViewState": "AgIAAD8BAAAAAAAAAAAqwCwEAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T16:52:49.838Z",
               "IsPinned": true,
@@ -44,7 +44,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Form2.cs [Design]",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
               "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form2.cs",
@@ -76,14 +76,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
               "RelativeDocumentMoniker": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs [Design]",
-              "RelativeToolTip": "..\\..\\..\\Desktop\\DA\\Mo_Phong_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\Do_An_IT008_Minh_Hoa_Giai_Thuat_Sap_Xep\\Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs [Design]",
+              "RelativeToolTip": "Mo_Phong_Giai_Thuat_Sap_Xep\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T16:50:16.018Z"
+              "WhenOpened": "2025-11-09T16:50:16.018Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
