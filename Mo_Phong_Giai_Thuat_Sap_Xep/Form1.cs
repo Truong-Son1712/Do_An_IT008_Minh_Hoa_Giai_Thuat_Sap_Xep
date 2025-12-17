@@ -435,7 +435,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             int pos_y_truoc_phan_hoach = Math.Max(30, Toa_Do_Y_Defaut - 140); //kéo dãy đang phân hoạch lên 
             int pos_y_phan_hoach = pos_y_truoc_phan_hoach + 40;     //khi phân hoạch thì hạ xuống 1 đoạn
 
-            // nhấc đoạn phân hoạch lên ^.^
+            // raise đoạn phân hoạch lên 
             for (int i = left; i <= right; i++)
                 await Di_Chuyen_pos_moi(Mang_labels[i], Mang_labels[i].Left, pos_y_truoc_phan_hoach, tk);
 
@@ -500,7 +500,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 lbl.BackColor = Color.Aquamarine;
             }
 
-            //cập nhật giá trị
+            //cập nhật giá trị 
             int[] Cap_nhat_gia_tri = new int[len];
             Label[] Cap_nhat_label = new Label[len];
             int pos = 0;
@@ -540,7 +540,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             Label_Root.BackColor = Mac_Dinh;
 
-            if (left < Vi_Tri_Root_sau_PH - 1)    //phân hoạch mảng bên trái root
+            if (left < Vi_Tri_Root_sau_PH - 1)    //phân hoạch mảng bên trái node root
                 await Quick_Sort(left, Vi_Tri_Root_sau_PH - 1, tk);
             if (Vi_Tri_Root_sau_PH + 1 < right)
                 await Quick_Sort(Vi_Tri_Root_sau_PH + 1, right, tk);  //phân hoạch mảng bên phải root
