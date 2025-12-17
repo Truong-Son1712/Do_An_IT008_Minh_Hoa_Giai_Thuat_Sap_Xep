@@ -100,7 +100,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             // s: 0..1 (delay nhỏ => s lớn => nhanh hơn)
             double s = (550 - duyet_delay) / 540.0;
 
-            // Bước nhảy nhỏ nhưng tăng dần theo speed: 2..10 px/tick
+            // Bước nhảy nhỏ và tăng dần theo speed: 2..10 px/tick
             van_toc_di_chuyen = 2 + (int)Math.Round(8 * s);
             if (van_toc_di_chuyen < 2) van_toc_di_chuyen = 2;
 
@@ -333,7 +333,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 Mang_Gia_Tri[Vi_tri_chen] = Gia_tri_dang_xet;
                 Mang_labels[Vi_tri_chen] = Label_dang_xet;
 
-                for (int k = 0; k <= i; k++) //tô màu mấy cái đã xét về bình thường
+                for (int k = 0; k <= i; k++) //tô màu những label đã xét về bình thường
                     Mang_labels[k].BackColor = Da_co_dinh;
 
                 for (int k = i + 1; k < Mang_labels.Count; k++)
