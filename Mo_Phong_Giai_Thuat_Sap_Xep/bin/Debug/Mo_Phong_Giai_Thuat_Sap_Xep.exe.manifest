@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mo_Phong_Giai_Thuat_Sap_Xep.exe" size="717792">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mo_Phong_Giai_Thuat_Sap_Xep.exe" size="718304">
       <assemblyIdentity name="Mo_Phong_Giai_Thuat_Sap_Xep" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>L0ZeKF4uV94i+ZKQ4hq2Oit750cWIQyFWS0EmmC8L6g=</dsig:DigestValue>
+        <dsig:DigestValue>x90WRbCcdR7hR/7IDYc6VE/KsDk+fFWJuf7tONeg7rY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

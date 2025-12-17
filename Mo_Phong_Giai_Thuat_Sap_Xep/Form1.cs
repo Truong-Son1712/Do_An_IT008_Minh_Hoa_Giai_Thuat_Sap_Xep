@@ -678,6 +678,22 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                     button_stop.PerformClick();
                 return true;
             }
+            if (keyData == Keys.Enter)
+            {
+                button_add.PerformClick();
+                return true;
+            }
+            if (keyData == Keys.Oemcomma)
+            {
+                button_increase_speed.PerformClick();
+                return true;
+            }
+            if (keyData == Keys.OemPeriod)
+            {
+                button_decrease_speed.PerformClick();
+                return true;
+            }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
         private async Task Thay_Doi_Goc_xoay()
