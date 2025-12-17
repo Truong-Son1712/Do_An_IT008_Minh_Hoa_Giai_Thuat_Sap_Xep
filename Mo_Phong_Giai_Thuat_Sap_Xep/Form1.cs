@@ -18,7 +18,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         int Le_trai_X = 60; // lề trái cho dãy
         int Toa_Do_Y_Defaut;  //tạo độ Y mặc định khi khởi tạo                
-        int Nhac_Y => Toa_Do_Y_Defaut - 80;  // Vị trí của Y khi nhấc nó lên
+        int Nhac_Y => Toa_Do_Y_Defaut - 80;  // Vị trí tọa độ Y của label khi nhấc nó lên
         int khoang_cach_label = 70; 
         const int so_phan_tu_max = 10;
 
@@ -29,7 +29,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         double scale_duyet_move = 1.6;
         int van_toc_di_chuyen = 4;   // dv tinh px/tick
-        int do_tre = 10; // độ trễ giữa các “tick” di chuyển, donvi la ms ^^
+        int do_tre = 10; // độ trễ giữa các “tick” di chuyển, donvi la ms 
 
         CancellationTokenSource CTS;
 
@@ -108,7 +108,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             int Thoi_gian_nghi = 14 - (int)Math.Round(10 * s);
             if (Thoi_gian_nghi < 2) Thoi_gian_nghi = 2;
 
-            // Áp hệ số người dùng (nhỏ hơn -> nhanh hơn). Không kẹp trần 28 nữa.
+            // Áp hệ số người dùng (nhỏ hơn -> nhanh hơn)
             do_tre = (int)Math.Round(Thoi_gian_nghi * scale_duyet_move);
             if (do_tre < 2) do_tre = 2;      // sàn an toàn
         }
