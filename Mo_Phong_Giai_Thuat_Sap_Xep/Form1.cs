@@ -500,7 +500,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 lbl.BackColor = Color.Aquamarine;
             }
 
-            //cập nhật giá trị 
+            //cập nhật giá trị  mới của label 
             int[] Cap_nhat_gia_tri = new int[len];
             Label[] Cap_nhat_label = new Label[len];
             int pos = 0;
