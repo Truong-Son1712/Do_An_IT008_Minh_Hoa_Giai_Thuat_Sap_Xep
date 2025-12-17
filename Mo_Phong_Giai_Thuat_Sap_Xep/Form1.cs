@@ -701,12 +701,12 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             float x = 750, y = 32;
 
-            //vẽ hình tròn đỏ
+            //vẽ hình tròn đỏ làm nền
             float Ban_kinh_hinh_tron = 15;
             g.FillEllipse(Brushes.IndianRed, x - Ban_kinh_hinh_tron, y - Ban_kinh_hinh_tron, Ban_kinh_hinh_tron * 2, Ban_kinh_hinh_tron * 2);
             g.DrawEllipse(Pens.Black, x - Ban_kinh_hinh_tron, y - Ban_kinh_hinh_tron, Ban_kinh_hinh_tron * 2, Ban_kinh_hinh_tron * 2);
 
-            // vẽ ngôi sao
+            // vẽ ngôi sao vàng
             float R = 10;
             PointF[] DS_Diem = new PointF[10];
 
