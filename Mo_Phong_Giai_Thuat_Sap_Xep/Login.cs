@@ -97,19 +97,5 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 LoginBtn.PerformClick();
             }
         }
-        private void Login_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult kq = MessageBox.Show(
-               "Bạn có chắc chắn muốn thoát chương trình không?",
-               "Xác nhận thoát",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question
-            );
-
-            if (kq == DialogResult.No)
-            {
-                e.Cancel = true;
-            }
-        }
     }
 }
