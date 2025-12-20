@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Media;
 using Lich_su_Sap_Xep = Mo_Phong_Giai_Thuat_Sap_Xep.Form1.Lich_su_Sap_Xep;
 
 namespace Mo_Phong_Giai_Thuat_Sap_Xep
 {
     public partial class Form2 : Form
     {
+        SoundPlayer clickPlayer;
         private readonly List<Lich_su_Sap_Xep> Lich_Su;
         public Lich_su_Sap_Xep Ban_Ghi_Duoc_Chon { get; private set; }
 
         public Form2(List<Lich_su_Sap_Xep> history)
-        {   
+        {
+            clickPlayer = new SoundPlayer(Properties.Resources.click);
             InitializeComponent();
             Lich_Su = history ?? new List<Lich_su_Sap_Xep>();
             Load_Du_lieu_Lich_Su_Len_Grid();
             Cap_Nhat_Chieu_Cao_Grid();
+        }
+        void PlayClickSound()
+        {
+            clickPlayer.Stop();
+            clickPlayer.Play();
         }
         private void Load_Du_lieu_Lich_Su_Len_Grid()
         {
@@ -64,6 +72,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         }
         private void button_delete_history_Click(object sender, EventArgs e)
         {
+            PlayClickSound();
             if (dataGridView1.CurrentRow == null || dataGridView1.CurrentRow.Index < 0)
             {
                 MessageBox.Show("Hãy chọn một bản ghi cần xoá.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -83,6 +92,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         }
         private void button_delete_all_history_Click(object sender, EventArgs e)
         {
+            PlayClickSound();
             if (Lich_Su.Count == 0)
             {
                 MessageBox.Show("Không có bản ghi nào để xoá.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -102,6 +112,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            PlayClickSound();
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 

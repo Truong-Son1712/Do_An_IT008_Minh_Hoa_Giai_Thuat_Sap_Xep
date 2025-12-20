@@ -8,15 +8,19 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Login login = new Login();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                // Nếu login thành công (LoginForm trả về OK)
+                Application.Run(new Form1());
+            }
+            // Nếu login không thành công, ứng dụng sẽ kết thúc
+           
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Mo_Phong_Giai_Thuat_Sap_Xep;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Media;
+using System.Media;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
 
 namespace Mo_Phong_Giai_Thuat_Sap_Xep
 {
@@ -18,8 +22,8 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         int Le_trai_X = 60; // lề trái cho dãy
         int Toa_Do_Y_Defaut;  //tạo độ Y mặc định khi khởi tạo                
-        int Nhac_Y => Toa_Do_Y_Defaut - 80;  // Vị trí tọa độ Y của label khi nhấc nó lên
-        int khoang_cach_label = 70; 
+        int Nhac_Y => Toa_Do_Y_Defaut - 80;  // Vị trí của Y khi nhấc nó lên
+        int khoang_cach_label = 70;
         const int so_phan_tu_max = 10;
 
         int duyet_delay = 200;  // donvi la ms 
@@ -29,7 +33,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         double scale_duyet_move = 1.6;
         int van_toc_di_chuyen = 4;   // dv tinh px/tick
-        int do_tre = 10; // độ trễ giữa các “tick” di chuyển, donvi la ms 
+        int do_tre = 10; // độ trễ giữa các “tick” di chuyển, donvi la ms ^^
 
         CancellationTokenSource CTS;
 
@@ -37,30 +41,30 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
         readonly Color Dang_Duyet = Color.Orange;       // đang duyệt
         readonly Color Ung_Vien = Color.Tomato;       // ứng viên hiện tại
         readonly Color Da_co_dinh = Color.LightGreen;   // đã cố định
-        
-  
-        enum Loai_Sap_Xep { None, Exchange, Selection, Insertion, Bubble, Heap, Quick, Merge }
-        Loai_Sap_Xep Sap_xep = Loai_Sap_Xep.None;
 
+        public enum Loai_Sap_Xep { None, Exchange, Selection, Insertion, Bubble, Heap, Quick, Merge }
+        Loai_Sap_Xep Sap_xep = Loai_Sap_Xep.None;
 
         float Goc_quay = 0f; // góc quay (radian)
         bool is_xoay = false;
 
+
         public class Lich_su_Sap_Xep
         {
-            public List<int> DS_DuLieu { get; set; }      
-            public DateTime Thoi_Gian_ghi { get; set; }           
-            public string Chieu_Sap_Xep { get; set; }        
-            public string Giai_Thuat { get; set; }      
+            public List<int> DS_DuLieu { get; set; }
+            public DateTime Thoi_Gian_ghi { get; set; }
+            public string Chieu_Sap_Xep { get; set; }
+            public string Giai_Thuat { get; set; }
 
             public Lich_su_Sap_Xep(List<int> values, string direction, string algorithm)
             {
-                DS_DuLieu = new List<int>(values); 
+                DS_DuLieu = new List<int>(values);
                 Thoi_Gian_ghi = DateTime.Now;
                 Chieu_Sap_Xep = direction;
                 Giai_Thuat = algorithm;
             }
         }
+
         void Save_Du_Lieu()
         {
             if (Mang_Gia_Tri.Count == 0) return;
@@ -74,9 +78,11 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             Danh_Sach_Ban_Ghi.Insert(0, new Lich_su_Sap_Xep(Mang_Gia_Tri, Chieu_SX, Loai_Thuat_Toan));
         }
+
         public Form1()
         {
             InitializeComponent();
+
             // xử lý mượt cho ngôi sao
             this.DoubleBuffered = true;
             typeof(Control).InvokeMember(
@@ -90,17 +96,19 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             Invalidate();
 
             XuLy_ViTri_Y();
-           
+
             Khoa_Lua_Chon_InPut_Data(null, EventArgs.Empty);
             label_speed.Text = (550 - duyet_delay).ToString();
             Dieu_chinh_toc_do();
+ 
         }
+
         void Dieu_chinh_toc_do()
         {
             // s: 0..1 (delay nhỏ => s lớn => nhanh hơn)
             double s = (550 - duyet_delay) / 540.0;
 
-            // Bước nhảy nhỏ và tăng dần theo speed: 2..10 px/tick
+            // Bước nhảy nhỏ nhưng tăng dần theo speed: 2..10 px/tick
             van_toc_di_chuyen = 2 + (int)Math.Round(8 * s);
             if (van_toc_di_chuyen < 2) van_toc_di_chuyen = 2;
 
@@ -108,41 +116,48 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             int Thoi_gian_nghi = 14 - (int)Math.Round(10 * s);
             if (Thoi_gian_nghi < 2) Thoi_gian_nghi = 2;
 
-            // Áp hệ số người dùng (nhỏ hơn -> nhanh hơn)
+            // Áp hệ số người dùng (nhỏ hơn -> nhanh hơn). Không kẹp trần 28 nữa.
             do_tre = (int)Math.Round(Thoi_gian_nghi * scale_duyet_move);
             if (do_tre < 2) do_tre = 2;      // sàn an toàn
         }
+
         void Luu_Data_Gan_Nhat()
         {
-            Mang_Pre_Sort = new List<int>(Mang_Gia_Tri); 
+            Mang_Pre_Sort = new List<int>(Mang_Gia_Tri);
         }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
             XuLy_ViTri_Y();
             Cap_nhat_vi_tri_Y();
         }
+
         void XuLy_ViTri_Y()
         {
             Toa_Do_Y_Defaut = Math.Max(80, this.ClientSize.Height / 3);
         }
+
         void Cap_nhat_vi_tri_Y()
         {
             for (int i = 0; i < Mang_labels.Count; i++)
                 Mang_labels[i].Top = Toa_Do_Y_Defaut;
         }
+
         void Khoa_Lua_Chon_InPut_Data(object sender, EventArgs e)
         {
             bool is_Nhap_Tu_Dong = radioButton_Random.Checked;
             textBox_Input_Number_Element_RanDom.Enabled = is_Nhap_Tu_Dong;
             textBox_Input_Element_By_Hand.Enabled = !is_Nhap_Tu_Dong;
         }
+
         void Change_Van_toc_duyet(int delta)
         {
             duyet_delay = Math.Max(10, Math.Min(500, duyet_delay + delta));
             label_speed.Text = (550 - duyet_delay).ToString();
             Dieu_chinh_toc_do();
         }
+
         void Xoa_Tat_ca_Label()
         {
             var Xoa_label = new List<Control>();
@@ -162,6 +177,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             Mang_labels.Clear();
             Mang_Gia_Tri.Clear();
         }
+
         Label Khoi_tao_Label(int v, int idx) => new Label
         {
             AutoSize = false,
@@ -171,12 +187,14 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             TextAlign = ContentAlignment.MiddleCenter,
             BackColor = Mac_Dinh,
             Location = new Point(Le_trai_X + idx * khoang_cach_label, Toa_Do_Y_Defaut),
-            Tag = "Phan_tu_mang"  
+            Tag = "Phan_tu_mang"
         };
+
         async Task Tam_dung(CancellationToken tk)
         {
             while (is_dung_lai) await Task.Delay(30, tk); //chờ 30ms mỗi vòng lặp
         }
+
         async Task Di_Chuyen_pos_moi(Label lb, int tx, int ty, CancellationToken tk)
         {
             while (Math.Abs(lb.Left - tx) > van_toc_di_chuyen || Math.Abs(lb.Top - ty) > van_toc_di_chuyen)
@@ -189,21 +207,25 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             lb.Left = tx;
             lb.Top = ty;
         }
-        async Task Nhac_Label_len(Label lb,CancellationToken tk)
+
+        async Task Nhac_Label_len(Label lb, CancellationToken tk)
         {
             lb.BackColor = Color.Gold;
             await Di_Chuyen_pos_moi(lb, lb.Left, Nhac_Y, tk);
         }
-        async Task Ha_Label_Xuong(Label lb ,CancellationToken tk)
+
+        async Task Ha_Label_Xuong(Label lb, CancellationToken tk)
         {
-            await Di_Chuyen_pos_moi(lb, lb.Left,Toa_Do_Y_Defaut, tk);
+            await Di_Chuyen_pos_moi(lb, lb.Left, Toa_Do_Y_Defaut, tk);
             lb.BackColor = Mac_Dinh;
         }
+
         private async Task Di_Chuyen_label(Label lbl, int targetX, int targetY, CancellationToken tk)
         {
             await Di_Chuyen_pos_moi(lbl, lbl.Left, targetY, tk);
             await Di_Chuyen_pos_moi(lbl, targetX, lbl.Top, tk);
         }
+
         async Task Hoan_vi_Label(int i, int j, CancellationToken tk)
         {
             if (i == j) return;
@@ -212,7 +234,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             A.BackColor = Ung_Vien; B.BackColor = Ung_Vien;
             await Task.Delay(duyet_delay, tk);
 
-            await Task.WhenAll(Nhac_Label_len(A ,tk), Nhac_Label_len(B,tk));
+            await Task.WhenAll(Nhac_Label_len(A, tk), Nhac_Label_len(B, tk));
 
             int ax = Le_trai_X + i * khoang_cach_label;
             int bx = Le_trai_X + j * khoang_cach_label;
@@ -221,13 +243,14 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 Di_Chuyen_pos_moi(B, ax, Nhac_Y, tk)
             );
 
-            await Task.WhenAll(Ha_Label_Xuong(A,tk), Ha_Label_Xuong(B, tk));
+            await Task.WhenAll(Ha_Label_Xuong(A, tk), Ha_Label_Xuong(B, tk));
 
             (Mang_labels[i], Mang_labels[j]) = (Mang_labels[j], Mang_labels[i]);
             (Mang_Gia_Tri[i], Mang_Gia_Tri[j]) = (Mang_Gia_Tri[j], Mang_Gia_Tri[i]);
 
             A.BackColor = Mac_Dinh; B.BackColor = Mac_Dinh;
         }
+
         async Task Run_Giai_Thuat_Sap_Xep(CancellationToken tk)
         {
             switch (Sap_xep)
@@ -242,7 +265,9 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             for (int i = 0; i < Mang_labels.Count; i++) Mang_labels[i].BackColor = Da_co_dinh;
         }
+
         int So_sanh(int a, int b) => is_tang_dan ? a.CompareTo(b) : b.CompareTo(a);
+
         async Task Exchange_sort(CancellationToken tk)
         {
             for (int i = 0; i < Mang_Gia_Tri.Count - 1; i++)
@@ -265,6 +290,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             if (Mang_labels.Count > 0) Mang_labels[Mang_labels.Count - 1].BackColor = Da_co_dinh;
         }
+
         async Task Selection_Sort(CancellationToken tk)
         {
             for (int i = 0; i < Mang_Gia_Tri.Count; i++)
@@ -294,6 +320,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 Mang_labels[i].BackColor = Da_co_dinh;
             }
         }
+
         int Toa_do_label(int idx) => Le_trai_X + idx * khoang_cach_label;
 
         async Task Insertion_Sort(CancellationToken tk)
@@ -306,15 +333,15 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 int Gia_tri_dang_xet = Mang_Gia_Tri[i];
                 Label Label_dang_xet = Mang_labels[i];
 
-                Label_dang_xet.BackColor = Ung_Vien;         
+                Label_dang_xet.BackColor = Ung_Vien;
                 await Task.Delay(duyet_delay, tk);
-                await Nhac_Label_len(Label_dang_xet, tk);        
+                await Nhac_Label_len(Label_dang_xet, tk);
 
                 int j = i - 1;
 
                 while (j >= 0 && So_sanh(Gia_tri_dang_xet, Mang_Gia_Tri[j]) < 0)
                 {
-                    Mang_labels[j].BackColor = Dang_Duyet;     
+                    Mang_labels[j].BackColor = Dang_Duyet;
                     await Task.Delay(duyet_delay / 2, tk);
 
                     // Dịch phần tử j sang phải (j -> j+1) 
@@ -329,11 +356,11 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 // Chèn key vào vị trí (j+1)
                 int Vi_tri_chen = j + 1;
                 await Di_Chuyen_pos_moi(Label_dang_xet, Toa_do_label(Vi_tri_chen), Nhac_Y, tk);
-                await Ha_Label_Xuong(Label_dang_xet, tk);         
+                await Ha_Label_Xuong(Label_dang_xet, tk);
                 Mang_Gia_Tri[Vi_tri_chen] = Gia_tri_dang_xet;
                 Mang_labels[Vi_tri_chen] = Label_dang_xet;
 
-                for (int k = 0; k <= i; k++) //tô màu những label đã xét về bình thường
+                for (int k = 0; k <= i; k++) //tô màu mấy cái đã xét về bình thường
                     Mang_labels[k].BackColor = Da_co_dinh;
 
                 for (int k = i + 1; k < Mang_labels.Count; k++)
@@ -344,6 +371,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             for (int k = 0; k < Mang_labels.Count; k++)
                 Mang_labels[k].BackColor = Da_co_dinh;
         }
+
         async Task Bubble_Sort(CancellationToken tk)
         {
             for (int i = 0; i < Mang_Gia_Tri.Count - 1; i++)
@@ -365,6 +393,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             if (Mang_labels.Count > 0) Mang_labels[0].BackColor = Da_co_dinh;
         }
+
         async Task Heap_Sort(CancellationToken tk)
         {
             int n = Mang_Gia_Tri.Count;
@@ -385,6 +414,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             if (Mang_labels.Count > 0) Mang_labels[0].BackColor = Da_co_dinh;
         }
+
         async Task Heapify(int heapSize, int i, CancellationToken tk)
         {
             while (true)
@@ -418,24 +448,26 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 i = goc;
             }
         }
+
         void Highlight_Phan_Tu_Trong_Doan(int left, int right, Color color)
         {
             for (int i = left; i <= right && i < Mang_labels.Count; i++)
                 Mang_labels[i].BackColor = color;
         }
+
         async Task Quick_Sort(int left, int right, CancellationToken tk)
         {
             if (left >= right) return;
 
             Highlight_Phan_Tu_Trong_Doan(left, right, Color.LightYellow); //tô màu đoạn đang phân hoạch
-            await Task.Delay(duyet_delay, tk); 
+            await Task.Delay(duyet_delay, tk);
 
             int len = right - left + 1;
 
             int pos_y_truoc_phan_hoach = Math.Max(30, Toa_Do_Y_Defaut - 140); //kéo dãy đang phân hoạch lên 
             int pos_y_phan_hoach = pos_y_truoc_phan_hoach + 40;     //khi phân hoạch thì hạ xuống 1 đoạn
 
-            // raise đoạn phân hoạch lên 
+            // nhấc đoạn phân hoạch lên ^.^
             for (int i = left; i <= right; i++)
                 await Di_Chuyen_pos_moi(Mang_labels[i], Mang_labels[i].Left, pos_y_truoc_phan_hoach, tk);
 
@@ -453,7 +485,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             {
                 if (i == Root_Phan_Hoach)
                 {
-                    bang.Add(i); 
+                    bang.Add(i);
                     continue;
                 }
                 int cmp = So_sanh(Mang_Gia_Tri[i], Gia_Tri_Root);
@@ -469,7 +501,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             int Toa_Do_X_Root_Sau_PH = Toa_do_label(Vi_Tri_Root_sau_PH); //tọa độ root sau phân hoạch
 
             await Di_Chuyen_label(Label_Root, Toa_Do_X_Root_Sau_PH, pos_y_phan_hoach, tk);
-           
+
             int ViTri_ke_tiep_ben_trai = left;                       // vị trí phần tử bé hơn root
             int ViTri_Ke_Tiep_Ptu_bang = Vi_Tri_Root_sau_PH + 1;          // vị trí phần tử bằng root
             int ViTri_Ke_Tiep_Ben_Phai = Vi_Tri_Root_sau_PH + so_phan_tu_bang; // vị trí phần tử lớn hơn root
@@ -477,7 +509,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             for (int i = left; i <= right; i++)
             {
                 if (i == Root_Phan_Hoach)
-                    continue; 
+                    continue;
 
                 Label lbl = Mang_labels[i];
                 int cmp = So_sanh(Mang_Gia_Tri[i], Gia_Tri_Root);
@@ -500,7 +532,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 lbl.BackColor = Color.Aquamarine;
             }
 
-            //cập nhật giá trị  mới của label 
+            //cập nhật giá trị
             int[] Cap_nhat_gia_tri = new int[len];
             Label[] Cap_nhat_label = new Label[len];
             int pos = 0;
@@ -540,11 +572,12 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             Label_Root.BackColor = Mac_Dinh;
 
-            if (left < Vi_Tri_Root_sau_PH - 1)    //phân hoạch mảng bên trái node root
+            if (left < Vi_Tri_Root_sau_PH - 1)    //phân hoạch mảng bên trái root
                 await Quick_Sort(left, Vi_Tri_Root_sau_PH - 1, tk);
             if (Vi_Tri_Root_sau_PH + 1 < right)
                 await Quick_Sort(Vi_Tri_Root_sau_PH + 1, right, tk);  //phân hoạch mảng bên phải root
         }
+
         async Task Merge_2_array(int l, int m, int r, CancellationToken tk)
         {
             int Toa_do_Y_truoc_merge = Math.Max(30, Toa_Do_Y_Defaut - 140);   // tọa độ khi nhấc 2 mảng lên cao để merge
@@ -595,7 +628,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                     await Di_Chuyen_label(Mang_Label_Trai[li], Toa_do_label(k), Toa_do_Y_sau_merge, tk);
                     Mang_gia_tri_ptu_da_merge.Add(Gia_Tri_Mang_Trai[li]);
                     Mang_Label_ptu_da_merge.Add(Mang_Label_Trai[li]);
-                   
+
                     li++;
                     if (ri < Mang_Label_Phai.Count)
                         Mang_Label_Phai[ri].BackColor = Color.MediumPurple;
@@ -610,7 +643,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                     if (li < Mang_Label_Trai.Count)
                         Mang_Label_Trai[li].BackColor = Color.LightSkyBlue;
                 }
-                Mang_Label_ptu_da_merge[Mang_Label_ptu_da_merge.Count-1].BackColor = Color.Aquamarine;
+                Mang_Label_ptu_da_merge[Mang_Label_ptu_da_merge.Count - 1].BackColor = Color.Aquamarine;
                 k++;
                 await Task.Delay(duyet_delay / 2, tk);
             }
@@ -641,10 +674,11 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
                 Mang_Gia_Tri[idx] = Mang_gia_tri_ptu_da_merge[i];
                 Mang_labels[idx] = Mang_Label_ptu_da_merge[i];
-                Mang_labels[idx].BackColor = Da_co_dinh; 
+                Mang_labels[idx].BackColor = Da_co_dinh;
             }
             await Task.Delay(duyet_delay, tk);
         }
+
         async Task Merge_Sort(int l, int r, CancellationToken tk)
         {
             if (l >= r) return;
@@ -653,23 +687,46 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             await Merge_Sort(m + 1, r, tk);
             await Merge_2_array(l, m, r, tk);
         }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.KeyCode == Keys.Space)
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                button_stop.PerformClick();   
+                button_stop.PerformClick();
             }
             if (e.KeyCode == Keys.Delete)
             {
-                button_reset.PerformClick(); 
+                button_reset.PerformClick();
             }
-            if(e.KeyCode == Keys.F5)
+            if (e.KeyCode == Keys.F5)
             {
                 button_start.PerformClick();
             }
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                button_add.PerformClick();   
+            }
+            if (e.KeyCode == Keys.Oemcomma) 
+            {
+                button_increase_speed.PerformClick();  
+            }
+            if (e.KeyCode == Keys.OemPeriod) 
+            {
+                button_decrease_speed.PerformClick(); 
+            }
+            else if (e.Control && e.KeyCode == Keys.Z)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                button_before_sort.PerformClick();
+            }
         }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Space)
@@ -678,38 +735,24 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                     button_stop.PerformClick();
                 return true;
             }
-            if (keyData == Keys.Enter)
-            {
-                button_add.PerformClick();
-                return true;
-            }
-            if (keyData == Keys.Oemcomma)
-            {
-                button_increase_speed.PerformClick();
-                return true;
-            }
-            if (keyData == Keys.OemPeriod)
-            {
-                button_decrease_speed.PerformClick();
-                return true;
-            }
-
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
         private async Task Thay_Doi_Goc_xoay()
         {
-            if (is_xoay) return; 
+            if (is_xoay) return;
             is_xoay = true;
 
             while (is_xoay)
             {
-                Goc_quay += 0.1f;   
+                Goc_quay += 0.1f;
                 if (Goc_quay > Math.PI * 2)
                     Goc_quay -= (float)(Math.PI * 2);
-                groupBox1.Invalidate();  
+                groupBox1.Invalidate();
                 await Task.Delay(30);   // tốc độ quay (ms)
             }
         }
+
         private void groupBox1_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
@@ -717,12 +760,12 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             float x = 750, y = 32;
 
-            //vẽ hình tròn đỏ làm nền
+            //vẽ hình tròn đỏ
             float Ban_kinh_hinh_tron = 15;
             g.FillEllipse(Brushes.IndianRed, x - Ban_kinh_hinh_tron, y - Ban_kinh_hinh_tron, Ban_kinh_hinh_tron * 2, Ban_kinh_hinh_tron * 2);
             g.DrawEllipse(Pens.Black, x - Ban_kinh_hinh_tron, y - Ban_kinh_hinh_tron, Ban_kinh_hinh_tron * 2, Ban_kinh_hinh_tron * 2);
 
-            // vẽ ngôi sao vàng
+            // vẽ ngôi sao
             float R = 10;
             PointF[] DS_Diem = new PointF[10];
 
@@ -769,6 +812,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             g.FillPolygon(Brushes.Gold, Xoay);
             g.DrawPolygon(Pens.Black, Xoay);
         }
+
         private void button_history_Click(object sender, EventArgs e)
         {
             var f = new Form2(Danh_Sach_Ban_Ghi);
@@ -783,6 +827,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 }
             }
         }
+
         private void Apply_Ban_Ghi_Tu_Lich_Su(Lich_su_Sap_Xep Du_Lieu)
         {
             is_dung_lai = false;
@@ -844,6 +889,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             Luu_Data_Gan_Nhat();
         }
+
         private void button_add_Click(object sender, EventArgs e)
         {
             if (radioButton_Random.Checked)
@@ -913,6 +959,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             Luu_Data_Gan_Nhat(); // lưu lại dữ liệu trước khi sort
         }
+
         private void button_stop_Click(object sender, EventArgs e)
         {
             if (!is_running) return;
@@ -924,6 +971,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             else
                 button_stop.Text = "Tạm Dừng";
         }
+
         async void button_start_Click(object sender, EventArgs e)
         {
             if (Mang_Gia_Tri.Count == 0) return;
@@ -960,6 +1008,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             button_stop.Text = "Tạm Dừng";
         }
+
         private void button_before_sort_Click(object sender, EventArgs e)
         {
             is_dung_lai = false;
@@ -986,6 +1035,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             button_add.Enabled = true;
             button_stop.Text = "Tạm Dừng";
         }
+
         private void button_reset_Click(object sender, EventArgs e)
         {
             is_dung_lai = false;
@@ -994,58 +1044,72 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             Xoa_Tat_ca_Label();
             button_add.Enabled = true;
         }
+
         private void button_increase_speed_Click(object sender, EventArgs e)
         {
             Change_Van_toc_duyet(-10);
         }
+
         private void button_decrease_speed_Click(object sender, EventArgs e)
         {
             Change_Van_toc_duyet(10);
         }
+
         private void radioButton_Random_CheckedChanged(object sender, EventArgs e)
         {
             Khoa_Lua_Chon_InPut_Data(sender, e);
         }
+
         private void radioButton_By_Hand_CheckedChanged(object sender, EventArgs e)
         {
             Khoa_Lua_Chon_InPut_Data(sender, e);
         }
+
         private void radioButton_Increase_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Increase.Checked) is_tang_dan = true;
         }
+
         private void radioButton_Decrease_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Decrease.Checked) is_tang_dan = false;
         }
+
         private void radioButton_Exchange_Sort_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Exchange_Sort.Checked) Sap_xep = Loai_Sap_Xep.Exchange;
         }
+
         private void radioButton_Selection_Sort_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Selection_Sort.Checked) Sap_xep = Loai_Sap_Xep.Selection;
         }
+
         private void radioButton_Insertion_Sort_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Insertion_Sort.Checked) Sap_xep = Loai_Sap_Xep.Insertion;
         }
+
         private void radioButton_Bubble_Sort_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Bubble_Sort.Checked) Sap_xep = Loai_Sap_Xep.Bubble;
         }
+
         private void radioButton_Heap_Sort_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Heap_Sort.Checked) Sap_xep = Loai_Sap_Xep.Heap;
         }
+
         private void radioButton_Quick_Sort_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Quick_Sort.Checked) Sap_xep = Loai_Sap_Xep.Quick;
         }
+
         private void radioButton_Merge_Sort_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton_Merge_Sort.Checked) Sap_xep = Loai_Sap_Xep.Merge;
         }
+
         private void textBox_Input_Number_Element_RanDom_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsControl(e.KeyChar))
@@ -1074,6 +1138,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 return;
             }
         }
+
         private void textBox_Input_Element_By_Hand_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsControl(e.KeyChar))
@@ -1084,17 +1149,14 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 string text_IP_bang_tay = tb.Text;
                 int Vi_tri_boi_den = tb.SelectionStart;
                 int Do_dai_boi_den = tb.SelectionLength;
-                // - gõ ở vị trí đầu (selStart == 0)
-                // - và hiện tại chưa có '-' (trừ trường hợp đang bôi đen cả chuỗi để gõ đè)
                 bool Thay_the_toan_bo = (Do_dai_boi_den == text_IP_bang_tay.Length && text_IP_bang_tay.Length > 0);
                 string Text_moi;
                 if (Thay_the_toan_bo)
                 {
-                    Text_moi = "-"; // bôi đen hết rồi gõ '-' => kết quả chỉ còn "-"
+                    Text_moi = "-";
                 }
                 else
                 {
-                    // có '-' rồi thì k thêm  '-' đc nữa :))))
                     if (Vi_tri_boi_den != 0 || text_IP_bang_tay.Contains("-"))
                     {
                         e.Handled = true;
@@ -1109,16 +1171,14 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                     e.Handled = true;
                     return;
                 }
-                // ok
                 e.Handled = false;
                 return;
             }
-            if (!char.IsDigit(e.KeyChar))  // giới hạn chỉ được nhập kí tự là số
+            if (!char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
                 return;
             }
-            // trường hợp k có dấu -
             {
                 string text_input_bang_tay = tb.Text;
                 int pos_boiden = tb.SelectionStart;
@@ -1153,8 +1213,24 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             if (kq == DialogResult.No)
             {
-                e.Cancel = true; 
+                e.Cancel = true;
             }
+        }
+        private void ViewCodeBtn_Click(object sender, EventArgs e)
+        {
+            if (Sap_xep == Loai_Sap_Xep.None)
+            {
+                MessageBox.Show(
+                    "Vui lòng chọn thuật toán trước khi xem mã nguồn.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+            Form_ViewCode frm = new Form_ViewCode(Sap_xep, is_tang_dan);
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog(this);
         }
     }
 }
