@@ -250,7 +250,6 @@
             this.radioButton_Merge_Sort.Name = "radioButton_Merge_Sort";
             this.radioButton_Merge_Sort.Size = new System.Drawing.Size(94, 20);
             this.radioButton_Merge_Sort.TabIndex = 6;
-            this.radioButton_Merge_Sort.TabStop = true;
             this.radioButton_Merge_Sort.Text = "Merge Sort";
             this.radioButton_Merge_Sort.UseVisualStyleBackColor = true;
             this.radioButton_Merge_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Merge_Sort_CheckedChanged);
@@ -263,7 +262,6 @@
             this.radioButton_Quick_Sort.Name = "radioButton_Quick_Sort";
             this.radioButton_Quick_Sort.Size = new System.Drawing.Size(89, 20);
             this.radioButton_Quick_Sort.TabIndex = 5;
-            this.radioButton_Quick_Sort.TabStop = true;
             this.radioButton_Quick_Sort.Text = "Quick Sort";
             this.radioButton_Quick_Sort.UseVisualStyleBackColor = true;
             this.radioButton_Quick_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Quick_Sort_CheckedChanged);
@@ -276,7 +274,6 @@
             this.radioButton_Heap_Sort.Name = "radioButton_Heap_Sort";
             this.radioButton_Heap_Sort.Size = new System.Drawing.Size(89, 20);
             this.radioButton_Heap_Sort.TabIndex = 4;
-            this.radioButton_Heap_Sort.TabStop = true;
             this.radioButton_Heap_Sort.Text = "Heap Sort";
             this.radioButton_Heap_Sort.UseVisualStyleBackColor = true;
             this.radioButton_Heap_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Heap_Sort_CheckedChanged);
@@ -289,7 +286,6 @@
             this.radioButton_Bubble_Sort.Name = "radioButton_Bubble_Sort";
             this.radioButton_Bubble_Sort.Size = new System.Drawing.Size(98, 20);
             this.radioButton_Bubble_Sort.TabIndex = 3;
-            this.radioButton_Bubble_Sort.TabStop = true;
             this.radioButton_Bubble_Sort.Text = "Bubble Sort";
             this.radioButton_Bubble_Sort.UseVisualStyleBackColor = true;
             this.radioButton_Bubble_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Bubble_Sort_CheckedChanged);
@@ -302,7 +298,6 @@
             this.radioButton_Insertion_Sort.Name = "radioButton_Insertion_Sort";
             this.radioButton_Insertion_Sort.Size = new System.Drawing.Size(105, 20);
             this.radioButton_Insertion_Sort.TabIndex = 2;
-            this.radioButton_Insertion_Sort.TabStop = true;
             this.radioButton_Insertion_Sort.Text = "Insertion Sort";
             this.radioButton_Insertion_Sort.UseVisualStyleBackColor = true;
             this.radioButton_Insertion_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Insertion_Sort_CheckedChanged);
@@ -315,7 +310,6 @@
             this.radioButton_Selection_Sort.Name = "radioButton_Selection_Sort";
             this.radioButton_Selection_Sort.Size = new System.Drawing.Size(111, 20);
             this.radioButton_Selection_Sort.TabIndex = 1;
-            this.radioButton_Selection_Sort.TabStop = true;
             this.radioButton_Selection_Sort.Text = "Selection Sort";
             this.radioButton_Selection_Sort.UseVisualStyleBackColor = true;
             this.radioButton_Selection_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Selection_Sort_CheckedChanged);
@@ -323,6 +317,7 @@
             // radioButton_Exchange_Sort
             // 
             this.radioButton_Exchange_Sort.AutoSize = true;
+            this.radioButton_Exchange_Sort.Checked = true;
             this.radioButton_Exchange_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton_Exchange_Sort.Location = new System.Drawing.Point(17, 32);
             this.radioButton_Exchange_Sort.Name = "radioButton_Exchange_Sort";
