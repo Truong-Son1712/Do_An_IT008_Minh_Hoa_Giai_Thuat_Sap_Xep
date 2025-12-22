@@ -317,13 +317,11 @@
             // radioButton_Exchange_Sort
             // 
             this.radioButton_Exchange_Sort.AutoSize = true;
-            this.radioButton_Exchange_Sort.Checked = true;
             this.radioButton_Exchange_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton_Exchange_Sort.Location = new System.Drawing.Point(17, 32);
             this.radioButton_Exchange_Sort.Name = "radioButton_Exchange_Sort";
             this.radioButton_Exchange_Sort.Size = new System.Drawing.Size(115, 20);
             this.radioButton_Exchange_Sort.TabIndex = 0;
-            this.radioButton_Exchange_Sort.TabStop = true;
             this.radioButton_Exchange_Sort.Text = "Exchange Sort";
             this.radioButton_Exchange_Sort.UseVisualStyleBackColor = true;
             this.radioButton_Exchange_Sort.CheckedChanged += new System.EventHandler(this.radioButton_Exchange_Sort_CheckedChanged);
