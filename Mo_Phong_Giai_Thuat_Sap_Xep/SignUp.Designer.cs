@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUp));
             this.label1 = new System.Windows.Forms.Label();
             this.SendOTPBtn = new System.Windows.Forms.Button();
             this.OTPBox = new System.Windows.Forms.TextBox();
@@ -192,6 +193,7 @@
             this.Controls.Add(this.PsswrdLbl);
             this.Controls.Add(this.txtPassword);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "SignUp";

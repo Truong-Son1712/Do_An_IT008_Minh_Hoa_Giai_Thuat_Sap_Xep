@@ -121,6 +121,26 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sort_arrows_svgrepo_com {
+            get {
+                object obj = ResourceManager.GetObject("sort_arrows_svgrepo_com", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon sort_arrows_svgrepo_com1 {
+            get {
+                object obj = ResourceManager.GetObject("sort_arrows_svgrepo_com1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tr_mnam_20_154_Photoroom {
             get {
                 object obj = ResourceManager.GetObject("tr_mnam_20_154-Photoroom", resourceCulture);

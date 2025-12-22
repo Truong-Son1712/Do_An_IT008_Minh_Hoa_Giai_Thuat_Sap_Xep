@@ -33,8 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>sort-arrows-svgrepo-com.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -146,6 +145,7 @@
     <None Include="Resources\Image1.png" />
     <None Include="Resources\hide-show-password-eye-icon-260nw-21994797134.jpg" />
     <None Include="Resources\hide-show-password-eye-icon-260nw-2199479713.jpg" />
+    <None Include="Resources\sort-arrows-svgrepo-com.png" />
     <Content Include="sort-arrows-svgrepo-com.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

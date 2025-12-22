@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ViewCode));
             this.Exit_Button = new System.Windows.Forms.Button();
             this.ViewCode_Button = new System.Windows.Forms.Button();
             this.ViewPseudoCode_Button = new System.Windows.Forms.Button();
@@ -162,6 +163,7 @@
             this.Controls.Add(this.ViewCode_Button);
             this.Controls.Add(this.Exit_Button);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form_ViewCode";
