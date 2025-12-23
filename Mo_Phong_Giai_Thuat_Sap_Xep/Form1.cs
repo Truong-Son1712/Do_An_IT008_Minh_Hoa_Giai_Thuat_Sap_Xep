@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Media;
-using System.Media;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -67,12 +66,14 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         void Save_Du_Lieu()
         {
+            //kiem tra dieu kien
             if (Mang_Gia_Tri.Count == 0) return;
             if (Sap_xep == Loai_Sap_Xep.None) return;
 
             string Chieu_SX = is_tang_dan ? "Tăng Dần" : "Giảm Dần";
             string Loai_Thuat_Toan = Sap_xep.ToString();
 
+            // neu vuot qua gioi han ban ghi thi ghi de
             if (Danh_Sach_Ban_Ghi.Count >= 15)
                 Danh_Sach_Ban_Ghi.RemoveAt(Danh_Sach_Ban_Ghi.Count - 1);
 
@@ -160,6 +161,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         void Xoa_Tat_ca_Label()
         {
+            //tao danh sach tam
             var Xoa_label = new List<Control>();
 
             foreach (Control c in Controls)
@@ -892,11 +894,13 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         private void button_add_Click(object sender, EventArgs e)
         {
+            // nhap mang ngau nhien
             if (radioButton_Random.Checked)
             {
                 int so_phantu;
                 string tmp = textBox_Input_Number_Element_RanDom.Text;
                 bool is_songuyen = int.TryParse(tmp, out so_phantu);
+                // kiem tra dieu kien
                 if (!is_songuyen)
                 {
                     MessageBox.Show("Vui lòng nhập số phần tử của mảng trong đoạn [1, 10].",
@@ -931,11 +935,12 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                     Controls.Add(lb);
                 }
             }
-            else //nhap mang thu cong
+            else // nhap mang thu cong
             {
                 int gia_tri_phantu;
                 string tmp = textBox_Input_Element_By_Hand.Text;
                 bool is_songuyen = int.TryParse(tmp, out gia_tri_phantu);
+                // kiem tra dieu kien
                 if (!is_songuyen)
                 {
                     MessageBox.Show("Vui lòng nhập giá trị phần tử của mảng trong đoạn [-99, 999].",
@@ -948,6 +953,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                         "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                // luu vao mang va tao label
                 int idx = Mang_Gia_Tri.Count;
                 Mang_Gia_Tri.Add(gia_tri_phantu);
                 var lb = Khoi_tao_Label(gia_tri_phantu, idx);
@@ -974,6 +980,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         async void button_start_Click(object sender, EventArgs e)
         {
+            // kiem tra dieu kien
             if (Mang_Gia_Tri.Count == 0) return;
             if (Sap_xep == Loai_Sap_Xep.None)
             {
@@ -1004,7 +1011,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
             else
             {
-                is_dung_lai = false;  //bấm bắt đầu nữa thì coi như tiếp tục nè
+                is_dung_lai = false;  //bấm bắt đầu nữa thì coi như tiếp tục
             }
             button_stop.Text = "Tạm Dừng";
         }
@@ -1024,6 +1031,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             }
 
             Xoa_Tat_ca_Label();
+            // tao lai mang va label dua vao Mang_Pre_Sort
             for (int i = 0; i < Mang_Pre_Sort.Count; i++)
             {
                 int val = Mang_Pre_Sort[i];
@@ -1038,6 +1046,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         private void button_reset_Click(object sender, EventArgs e)
         {
+            // reset va xoa tat ca label
             is_dung_lai = false;
             is_running = false;
             CTS?.Cancel();

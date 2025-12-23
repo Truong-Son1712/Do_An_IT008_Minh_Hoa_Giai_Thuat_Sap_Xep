@@ -15,3 +15,4 @@ hoangdat|030102
 huygg|12345
 huyquan|1234|mêt@gmail.com
 huyqh|12345|gg@gm.com
+admin123|admin|thuan@gmail.com
