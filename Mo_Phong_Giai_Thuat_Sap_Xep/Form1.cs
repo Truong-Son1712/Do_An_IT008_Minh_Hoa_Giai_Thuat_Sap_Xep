@@ -66,7 +66,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         void Save_Du_Lieu()
         {
-            //kiem tra dieu kien
+            // kiem tra dieu kien
             if (Mang_Gia_Tri.Count == 0) return;
             if (Sap_xep == Loai_Sap_Xep.None) return;
 
@@ -204,7 +204,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
                 await Tam_dung(tk);
                 lb.Left += Math.Sign(tx - lb.Left) * van_toc_di_chuyen;
                 lb.Top += Math.Sign(ty - lb.Top) * van_toc_di_chuyen;
-                await Task.Delay(do_tre, tk);
+                await Task.Delay(do_tre, tk); // tao hieu ung di chuyen muot
             }
             lb.Left = tx;
             lb.Top = ty;
@@ -268,7 +268,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
             for (int i = 0; i < Mang_labels.Count; i++) Mang_labels[i].BackColor = Da_co_dinh;
         }
 
-        int So_sanh(int a, int b) => is_tang_dan ? a.CompareTo(b) : b.CompareTo(a);
+        int So_sanh(int a, int b) => is_tang_dan ? a.CompareTo(b) : b.CompareTo(a);//tang dan hoac giam dan
 
         async Task Exchange_sort(CancellationToken tk)
         {
@@ -692,7 +692,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-
+            // phim tat
             if (e.KeyCode == Keys.Space)
             {
                 e.Handled = true;
@@ -822,6 +822,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
             if (f.ShowDialog(this) == DialogResult.OK)
             {
+                // apply ban ghi trong lich su duyet 
                 var item = f.Ban_Ghi_Duoc_Chon;
                 if (item != null)
                 {
@@ -1018,6 +1019,7 @@ namespace Mo_Phong_Giai_Thuat_Sap_Xep
 
         private void button_before_sort_Click(object sender, EventArgs e)
         {
+            //kiem tra dieu kien
             is_dung_lai = false;
             if (is_running)
             {
